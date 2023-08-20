@@ -17,16 +17,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
 
         let firstVC = UINavigationController(rootViewController: HomeViewController())
+        let secondVC = UINavigationController(rootViewController: CalendarViewController())
 
         let tabBarController = UITabBarController()
-        tabBarController.setViewControllers([firstVC], animated: true)
+        tabBarController.setViewControllers([firstVC, secondVC], animated: true)
 
         if let items = tabBarController.tabBar.items {
             items[0].selectedImage = UIImage(systemName: "plus")
             items[0].title = "Home"
+
+            items[1].selectedImage = UIImage(systemName: "calendar")
+            items[1].title = "Calendar"
         }
 
         window?.rootViewController = tabBarController
+        window?.backgroundColor = .white
         window?.makeKeyAndVisible()
 
     }
