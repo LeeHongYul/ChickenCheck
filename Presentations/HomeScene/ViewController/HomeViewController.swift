@@ -9,7 +9,7 @@ import UIKit
 
 let cellID = "Cell"
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     let testData = ["전체", "스테이크", "소세지", "볶음밥", " 큐브"]
 
     private let collectionView: UICollectionView = {
@@ -25,6 +25,20 @@ class ViewController: UIViewController {
         return view
     }()
 
+    private let showButton: UIButton = {
+        let button = UIButton()
+
+        button.setTitle("Show All", for: .normal)
+                button.setTitleColor(.white, for: .normal)
+                button.backgroundColor = .blue
+        button.tintColor = .blue
+        button.layer.cornerRadius = 12
+
+        return button
+    }()
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,9 +50,12 @@ class ViewController: UIViewController {
         configureCollectionView()
     }
 
+
+
     func setViews() {
         view.addSubview(collectionView)
         view.addSubview(mainView)
+        mainView.addSubview(showButton)
     }
     
     func configureCollectionView() {
@@ -63,6 +80,24 @@ class ViewController: UIViewController {
         ])
 
         mainView.backgroundColor = .yellow
+
+        showButton.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            showButton.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 20),
+            showButton.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 20),
+            showButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -20),
+            showButton.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -20),
+            showButton.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            showButton.centerYAnchor.constraint(equalTo: mainView.centerYAnchor)
+        ])
+        showButton.backgroundColor = .gray
+        showButton.addTarget(self, action: #selector(addItemsButton), for: .touchUpInside)
+    }
+
+    @objc func addItemsButton() {
+        let nextVC = AddItemsViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 
     func creatLayout() -> UICollectionViewLayout {
@@ -85,7 +120,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -101,7 +136,7 @@ extension ViewController: UICollectionViewDataSource {
 
 }
 
-extension ViewController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate {
 
 }
 
