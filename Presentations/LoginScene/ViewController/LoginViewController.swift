@@ -49,12 +49,12 @@ class LoginViewController: UIViewController {
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([firstVC, secondVC], animated: true)
         tabBarController.modalPresentationStyle = .fullScreen
-        
+
         if let items = tabBarController.tabBar.items {
-            items[0].selectedImage = UIImage(systemName: "plus")
+            items[0].image = UIImage(systemName: "house")
             items[0].title = "Home"
 
-            items[1].selectedImage = UIImage(systemName: "calendar")
+            items[1].image = UIImage(systemName: "calendar")
             items[1].title = "Calendar"
         }
 
